@@ -5,9 +5,9 @@ services:
     image: mongo
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: Host(`${MUSER?Variable not set}`)
-      MONGO_INITDB_ROOT_PASSWORD: Host(`${MPASS?Variable not set}`)
-      MONGO_INITDB_DATABASE: Host(`${MDB?Variable not set}`)
+      MONGO_INITDB_ROOT_USERNAME: ${MUSER?Variable not set}
+      MONGO_INITDB_ROOT_PASSWORD: ${MPASS?Variable not set}
+      MONGO_INITDB_DATABASE: ${MDB?Variable not set}
     volumes:
       - mongo-data:/var/lib/mongodb
     networks:
