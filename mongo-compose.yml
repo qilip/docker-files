@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: Host(`${MUSER?Variable not set}`)
+      MONGO_INITDB_ROOT_PASSWORD: Host(`${MPASS?Variable not set}`)
+      MONGO_INITDB_DATABASE: Host(`${MDB?Variable not set}`)
+    volumes:
+      - mongo-data:/var/lib/mongodb
+    networks:
+      - lumia-backend
+    deploy:
+      placement:
+        constraints:
+          - node.labels.mongo.db-data == true
+networks:
+  lumia-backend:
+    external: true
+volumes:
+  mongo-data:
+    driver: local
